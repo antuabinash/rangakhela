@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ranga Khela - Drag and Drop Colors</title>
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    #page-heading {
+      margin-top: 20px;
+      font-size: 24px;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: row; /* Updated to arrange columns side by side */
+      justify-content: space-around;
+      align-items: center;
+      margin-top: 20px;
+    }
+
+    .color-box,
+    .empty-box {
+      width: 50px;
+      height: 50px;
+      margin: 10px;
+      cursor: move;
+      border: 1px solid #000;
+    }
+
+    .empty-box {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      border-style: dashed;
+    }
+  </style>
+</head>
+<body>
+  <h1 id="page-heading">ରଙ୍ଗ ଖେଳ</h1>
+
+  <div class="container" ondragover="allowDrop(event)" ondrop="drop(event)">
+    <div id="color-box1" class="color-box" draggable="true" ondragstart="drag(event)" style="background-color: #ff0000;"></div>
+    <div id="color-box2" class="color-box" draggable="true" ondragstart="drag(event)" style="background-color: #ffa500;"></div>
+    <div id="color-box3" class="color-box" draggable="true" ondragstart="drag(event)" style="background-color: #ffff00;"></div>
+    <div id="color-box4" class="color-box" draggable="true" ondragstart="drag(event)" style="background-color: #008000;"></div>
+    <div id="color-box5" class="color-box" draggable="true" ondragstart="drag(event)" style="background-color: #0000ff;"></div>
+    <div id="color-box6" class="color-box" draggable="true" ondragstart="drag(event)" style="background-color: #4b0082;"></div>
+    <div id="color-box7" class="color-box" draggable="true" ondragstart="drag(event)" style="background-color: #000000;"></div>
+  </div>
+
+  <div class="container" ondragover="allowDrop(event)" ondrop="drop(event)">
+    <div id="empty-box1" class="empty-box" ondragover="allowDrop(event)" ondrop="drop(event)">
+      <div>କଳା</div>
+    </div>
+    <div id="empty-box2" class="empty-box" ondragover="allowDrop(event)" ondrop="drop(event)">
+      <div>ସବୁଜ</div>
+    </div>
+    <div id="empty-box3" class="empty-box" ondragover="allowDrop(event)" ondrop="drop(event)">
+      <div>ବାଇଗଣି</div>
+    </div>
+    <div id="empty-box4" class="empty-box" ondragover="allowDrop(event)" ondrop="drop(event)">
+      <div>ନୀଳ</div>
+    </div>
+    <div id="empty-box5" class="empty-box" ondragover="allowDrop(event)" ondrop="drop(event)">
+      <div>ହଳଦିଆ</div>
+    </div>
+    <div id="empty-box6" class="empty-box" ondragover="allowDrop(event)" ondrop="drop(event)">
+      <div>ଲାଲ</div>
+    </div>
+    <div id="empty-box7" class="empty-box" ondragover="allowDrop(event)" ondrop="drop(event)">
+      <div>କମଳା</div>
+    </div>
+  </div>
+
+  <script>
+    function allowDrop(event) {
+      event.preventDefault();
+    }
+
+    function drag(event) {
+      event.dataTransfer.setData("text", event.target.id);
+    }
+
+    function drop(event) {
+      event.preventDefault();
+      var data = event.dataTransfer.getData("text");
+      var draggedElement = document.getElementById(data);
+      var dropTarget = event.target;
+
+      // Check if the drop target is an empty box
+      if (dropTarget.classList.contains('empty-box')) {
+        dropTarget.style.backgroundColor = draggedElement.style.backgroundColor;
+      }
+    }
+  </script>
+</body>
+</html>
